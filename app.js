@@ -14,6 +14,7 @@ const porcentaje = document.getElementById('porcentaje');
 
 let presupuesto_tot;
 
+
 //Clases
 
 class Presupuesto {
@@ -108,6 +109,7 @@ form_agregar_abono.addEventListener('submit', function(e){
 
     const nombre_abono = document.getElementById('txtNombreAbono').value; 
     const valor_abono = document.getElementById('txtValorAbono').value;
+    
 
     if (nombre_abono == '' || valor_abono == ''){
 
@@ -132,7 +134,7 @@ form_agregar_abono.addEventListener('submit', function(e){
             error.innerHTML = ``;
         }, 1000);
 
-        presupuesto_total = presupuesto_tot.presupuestoTotal(Number(valor_abono)); 
+        presupuesto_total = presupuesto_tot.presupuestoTotal(Number(valor_abono) ); 
 
         new_presupuesto_total = numberWithCommas(presupuesto_total);
         console.log(presupuesto_total)
@@ -167,6 +169,7 @@ form_descontar_abono.addEventListener('submit', function(e){
     e.preventDefault();
     const nombre_Descuento = document.getElementById('txtDescuento').value; 
     const valor_descuento = document.getElementById('txtValorDescuento').value;
+    const cantidad = document.getElementById('txtCantidadProducto').value;
 
     if(nombre_Descuento == '' || valor_descuento == ''){
 
@@ -188,11 +191,11 @@ form_descontar_abono.addEventListener('submit', function(e){
             error_descuento.innerHTML = ``;
         }, 1000);
 
-        new_descuento = numberWithCommas(valor_descuento);
+        new_descuento = numberWithCommas(valor_descuento * cantidad);
 
         ui.agregarGastoListado(nombre_Descuento, new_descuento, 'error')
     
-        presupuesto_gastado = presupuesto_tot.presupuestoGastado(Number(valor_descuento)); 
+        presupuesto_gastado = presupuesto_tot.presupuestoGastado(Number(valor_descuento * cantidad)); 
         new_descuento_presupuesto = numberWithCommas(presupuesto_gastado);
         ui.insertarDescuento(new_descuento_presupuesto)
     
